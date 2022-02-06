@@ -1,0 +1,28 @@
+{
+  "include": [
+    "./src/**/*",
+    "./data/*"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "data/*":[
+        "data/*"
+      ]
+    },
+  }
+}

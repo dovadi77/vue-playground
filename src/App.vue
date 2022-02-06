@@ -1,14 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App with Bootstrap 5" />
-  <Login @accountValid="checkAccount" v-if="!loggedIn" />
-  <LoggedIn v-if="loggedIn" msg="yeay berhasil!" />
+  <div class="container">
+    <Header msg="Welcome to Vue.js App with Bootstrap 5" />
+    <div class="my-3">
+      <Login @accountValid="checkAccount" v-if="!loggedIn" />
+      <Dashboard v-if="loggedIn" msg="yeay berhasil!" />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import Login from "./components/Login.vue";
-import LoggedIn from "./components/LoggedIn.vue";
+import Header from "@/components/Header.vue";
+import Login from "@/components/Login.vue";
+import Dashboard from "@/components/Dashboard.vue";
 
 export default {
   name: "App",
@@ -16,9 +19,9 @@ export default {
     return { loggedIn: false };
   },
   components: {
-    HelloWorld,
+    Header,
     Login,
-    LoggedIn,
+    Dashboard,
   },
   methods: {
     checkAccount(val) {

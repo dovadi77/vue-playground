@@ -1,43 +1,36 @@
 <template>
   <div class="container">
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        placeholder="name@example.com"
+    <form @submit.prevent="validateData">
+      <Input
         v-model="email"
+        type="email"
+        name="email"
+        :errMsg="error.email"
+        placeholder="name@example.com"
+        label="Email Address"
       />
-      <small class="text-danger" v-if="error.email.length > 0">{{
-        error.email
-      }}</small>
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        placeholder="Your password"
+      <Input
         v-model="password"
+        type="password"
+        name="password"
+        :errMsg="error.password"
+        placeholder="Your Password"
+        label="Password"
       />
-      <small class="text-danger" v-if="error.password.length > 0">{{
-        error.password
-      }}</small>
-    </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        :disabled="error.password.length > 0 || error.email.length > 0"
+      >
+        Login
+      </button>
+    </form>
   </div>
-  <button
-    type="button"
-    class="btn btn-primary"
-    @click="validateData"
-    :disabled="error.password.length > 0 && error.email.length > 0"
-  >
-    Login
-  </button>
 </template>
 
 <script>
+import Input from "./molecules/Input.vue";
+
 export default {
   name: "Login",
   emits: ["accountValid"],
@@ -68,19 +61,24 @@ export default {
   },
   watch: {
     email() {
-      if (!this.validateEmail()) {
+      if (this.email.length === 0) {
+        this.error.email = "Email tidak boleh kosong!";
+      } else if (!this.validateEmail()) {
         this.error.email = "Format email tidak sesuai!";
       } else {
         this.error.email = "";
       }
     },
     password(val) {
-      if (val.length < 8) {
-        this.error.password = "Password minimal 8 karakter";
+      if (val.length === 0) {
+        this.error.password = "Password tidak boleh kosong";
       } else {
         this.error.password = "";
       }
     },
+  },
+  components: {
+    Input,
   },
 };
 </script>

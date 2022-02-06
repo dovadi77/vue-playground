@@ -3,7 +3,7 @@
     <Header msg="Welcome to Vue.js App with Bootstrap 5" />
     <div class="my-3">
       <Login @accountValid="checkAccount" v-if="!loggedIn" />
-      <Dashboard v-if="loggedIn" msg="yeay berhasil!" />
+      <Dashboard v-if="loggedIn" msg="yeay berhasil!" :tasks="tasks" />
     </div>
   </div>
 </template>
@@ -12,11 +12,12 @@
 import Header from "@/components/Header.vue";
 import Login from "@/components/Login.vue";
 import Dashboard from "@/components/Dashboard.vue";
+import tasks from "@/data/todo.json";
 
 export default {
   name: "App",
   data() {
-    return { loggedIn: false };
+    return { loggedIn: false, tasks: tasks };
   },
   components: {
     Header,
